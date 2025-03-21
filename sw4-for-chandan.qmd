@@ -1,0 +1,33 @@
+---
+date: last-modified
+title: |
+    SW4 for Chandan
+author:
+  - name: Sean R. Ford
+    orcid: 0000-0002-0376-5792
+    email: sean@llnl.gov
+    corresponding: true
+    affiliation: [{id: llnl, name: Lawrence Livermore National Laboratory, city: Livermore, country: USA, state: California, postal-code: 94550}]
+abstract: |
+    Can you run MZZ, MXX, MYY seismograms for a layered medium in your SW4 and send  me the out output with the model? Kindly do it.
+# bibliography: sw4-for-chandan.bib
+number-sections: true
+format:
+  html:
+    code-fold: true
+    default-image-extension: png
+  pdf:
+    echo: false
+    default-image-extension: pdf
+    fig-pos: 'htbp'
+execute:
+  cache: true
+  freeze: true # auto
+jupyter: python3
+---
+
+# Title
+
+This is all so wonderful
+
+## Subsection
