@@ -114,17 +114,40 @@ srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 mzz.sw4in
 
 # Results
 
-Raw and filtered (low pass at 5 Hz) are shown in @fig-results.
+Our goal for an accurate calculation is to have a minimum points per wavelength (PPW) of between 6 and 10.
+The PPW is related to the smallest wave velocity $v$ [m/s] divided by the grid spacing $h$ [m]divided by the maximum frequency represented $f$ [1/s]. and For the two grids (one grid with one refinement) the points per wavelength (PPW) for a 5 Hz maximum frequency is:
+
+$$
+\text{PPW} = v / h / f = 2008.9 / 50 / 5 \approxeq 8 
+$$
+
+Calculated displacements low passed at 5 Hz are shown in @fig-results.
 
 ```{python}
 #| label: fig-results
-#| fig-cap: "Vertical component recordings at station FUR bandpassed between 1 and 8 Hz."
+#| fig-cap: "Calculated displacements low passed at 5 Hz plotted with [ObsPy](https://www.obspy.org)."
 
-import matplotlib.pyplot as plt
-import pandas as pd
-from obspy import UTCDateTime, read
+# import matplotlib.pyplot as plt
+# import pandas as pd
+from obspy import read
 
+stream = read("Run/mxx.dir/rec.?", format="SAC")
+stream.filter('lowpass', freq=5.0)
+stream.plot();
+```
 
+The shear wave velocity model is shown in @fig-model.
+
+```{python}
+#| label: fig-model
+#| fig-cap: "Shear wave velocity model plotted with [VisIt](https://visit.llnl.gov/)"
+
+from os import system
+
+# system write a file called fig-model.py
+
+# system("visit -cli -nowin -s fig-model.py");
 
 ```
 
+<!-- ![Shear wave velocity model plotted with [VisIt](https://visit.llnl.gov/)](Figures/fig-model){#fig-model} -->
