@@ -26,8 +26,105 @@ execute:
 jupyter: python3
 ---
 
-# Title
+# Introduction
 
-This is all so wonderful
+We obtained [SW4](https://computing.llnl.gov/projects/serpentine-wave-propagation) 
+[v3.0](https://github.com/geodynamics/sw4/releases/tag/v3.0)
+from [GitHub](https://github.com/geodynamics/sw4) 
+and compiled on macos with [MPICH](https://www.mpich.org) 
+using the following `make.inc` file:
+```
+proj = yes
+SW4ROOT = /opt/homebrew
+fftw = yes
+# homebrew version uses openmpi so installed our own for mpich
+FFTWHOME = /Users/ford17/Applications/fftw-3.3.10
+FC = mpif90
+CXX = mpicxx
+EXTRA_LINK_FLAGS = -framework Accelerate -L/opt/homebrew/lib/gcc/current -lgfortran
+```
 
-## Subsection
+
+# Verification
+
+We reproduce the results from the [excellent tutorial](https://rbherrmann.github.io/ComputerProgramsSeismology/TUTORIAL/SW4CPS/index.html) 
+by [Bob Herrmann](https://www.slu.edu/science-and-engineering/academics/earth-atmospheric-sciences/faculty/herrmann-robert.php)
+who compared SW4 with [CPS](https://rbherrmann.github.io/ComputerProgramsSeismology/index.html)
+and found "excellent agreement".
+
+Bob used a triangular pulse source-time function and convolved the recordings with a triangle of 1 s duration.
+
+
+# Method
+
+The requirements are:
+
+- Station at (x,y,z) = (60, 0, 0)
+- Source at (x,y,z) = (10, 0, 10)
+- WUS model
+- PPW for 5 Hz
+- Dirac source
+
+So we use the following SW4 input `run.sw4in` file:
+```
+fileio pfs=1 nwriters=16 path=mxx.dir printcycle=1000
+grid x=70e3 y=35e3 z=50e3 h=100
+time t=60
+refinement zmax=35000
+block vp=7900.0 vs=4620.0 rho=3276.0 qp=60976 qs=27027
+block vp=6352.0 vs=3756.5 rho=2805.6 qp=658 qs=293 z2=35000
+block vp=5544.5 vs=3295.3 rho=2608.9 qp=287 qs=128 z2=8000
+block vp=3406.5 vs=2008.9 rho=2215.0 qp=331 qs=147 z2=1900
+source x=10e3 y=0 z=10e3 mxx=1e18 type=Dirac
+rec x=60e3 y=0 z=0 file=rec sacformat=1
+image mode=s y=0 cycle=1
+```
+
+Note that refinement was used for a more efficient calculation.
+
+And to calculate the results we could use the command:
+```
+mpirun -np 16 sw4 mxx.sw4in
+```
+
+In practice we used many more processors available on ruby from [LC](https://hpc.llnl.gov) 
+with the slurm script:
+```
+#SBATCH -N 36
+#SBATCH -J run
+#SBATCH -t 360
+#SBATCH -p pbatch
+#SBATCH --license=lustre1
+#SBATCH -A gmp
+#SBATCH -o run.sw4out
+#SBATCH -e run.sw4err
+
+# Max: 1440 minutes (24 hours) on 520 nodes
+
+# Set CPUS/nodes for RUBY (limit 520 nodes for 24 hours)
+@ CPUSPERNODE = 56
+# Compute number of CPUs
+@ NCPUS = ( $SLURM_JOB_NUM_NODES * $CPUSPERNODE )
+
+srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 mxx.sw4in
+srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 myy.sw4in
+srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 mzz.sw4in
+```
+
+
+# Results
+
+Raw and filtered (low pass at 5 Hz) are shown in @fig-results.
+
+```{python}
+#| label: fig-results
+#| fig-cap: "Vertical component recordings at station FUR bandpassed between 1 and 8 Hz."
+
+import matplotlib.pyplot as plt
+import pandas as pd
+from obspy import UTCDateTime, read
+
+
+
+```
+
