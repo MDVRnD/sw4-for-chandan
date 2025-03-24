@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sw4dir="$HOME/Applications/sw4-3.0/optimize"
+
+mpirun -np 2 $sw4dir/sw4 test.sw4in
