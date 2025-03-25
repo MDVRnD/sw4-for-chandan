@@ -1,0 +1,318 @@
+----------------------------------------------------------------
+            sw4 version 3.0
+
+ This program comes with ABSOLUTELY NO WARRANTY; released under GPL.
+ This is free software, and you are welcome to redistribute     
+ it under certain conditions, see LICENSE.txt for more details  
+----------------------------------------------------------------
+  Compiled on: Fri Dec 20 11:35:38 PST 2024
+  By user:     ford17
+  Machine:     ruby967
+  Compiler:    /usr/tce/packages/mvapich2/mvapich2-2.3.7-intel-classic-2021.6.0/bin/mpicxx
+  3rd party include dir: /usr/apps/wpp/include, and library dir: /usr/apps/wpp/lib
+----------------------------------------------------------------
+
+Input file: mxx.sw4in
+
+* Processing the grid command...
+* Setting nx to 701 to be consistent with h=1.00000000e+02
+* Setting ny to 351 to be consistent with h=1.00000000e+02
+* Setting nz to 501 to be consistent with h=1.00000000e+02
+ Number of curvilinear grids = 0
+ Number of Cartesian grids = 2
+ Total number of grids = 2
+
+*** No topography command found in input file. Using z=0 as free surface boundary ***
+
+
+Global grid sizes (without ghost points)
+Grid         h        Nx        Ny        Nz       Points      Type
+   0       100       701       351       151     37153701     Cartesian
+   1        50      1401       701       701    688452801     Cartesian
+Total number of grid points (without ghost points): 7.25607e+08
+
+
+Read station input, took 2.81810760e-04seconds.
+
+   Execution time, reading input file 6.79192543e-02 seconds 
+----------------------------------------------------
+ Making Directory: mxx.dir/
+		
+... Done!
+----------------------------------------------------
+Geographic and Cartesian coordinates of the corners of the computational grid:
+0: Lon= -1.180000e+02, Lat=3.700000e+01, x=0.000000e+00, y=0.000000e+00
+1: Lon= -1.180000e+02, Lat=3.762882e+01, x=7.000000e+04, y=0.000000e+00
+2: Lon= -1.176030e+02, Lat=3.762882e+01, x=7.000000e+04, y=3.500000e+04
+3: Lon= -1.176063e+02, Lat=3.700000e+01, x=0.000000e+00, y=3.500000e+04
+
+Considering all material blocks
+block command: outside = 0, material = 732975414
+block command: outside = 40592106, material = 692383308
+block command: outside = 571910850, material = 161064564
+block command: outside = 691727172, material = 41248242
+
+       ----------- Material properties ranges ---------------
+       2.21500000e+03 kg/m^3 <=  Density <= 3.27600000e+03 kg/m^3
+       3.40650000e+03 m/s    <=  Vp      <= 7.90000000e+03 m/s
+       2.00890000e+03 m/s    <=  Vs      <= 4.62000000e+03 m/s
+       1.68254787e+00        <=  Vp/Vs   <= 1.70995671e+00
+       8.93902945e+09 Pa     <=  mu      <= 6.99242544e+10 Pa
+       7.82533768e+09 Pa     <=  lambda  <= 6.46066512e+10 Pa
+       ------------------------------------------------------
+
+***** PPW = minVs/h/maxFrequency ********
+g=0, h=1.000000e+02, minVs/h=37.565 (Cartesian)
+g=1, h=5.000000e+01, minVs/h=40.178 (Cartesian)
+
+  time step = 6.34048399e-03
+
+   Execution time, start up phase 2.11368561e-01 seconds 
+Running sw4 on 2016 processors...
+Writing output to directory: mxx.dir/
+============================================================
+ Running program on 2016 MPI tasks using the following data: 
+
+ Start Time = 0 Goal Time = 60
+ Number of time steps = 9463 dt: 0.00634048
+
+-----------------------------------------------------------------------
+  Total seismic moment (M0): 7.07107e+17 Nm 
+  Moment magnitude     (Mw): 5.83299
+  Number of moment sources 1
+-----------------------------------------------------------------------
+
+   Execution time, initial data phase 9.30507183e-02 seconds 
+
+  Begin time stepping...
+Time step       1  t =   6.3404840e-03
+writing image plane on file mxx.dir/image.cycle=0001.y=0.s.sw4img
+Time step    1001  t =   6.3468245e+00
+Time step    2001  t =   1.2687308e+01
+Time step    3001  t =   1.9027792e+01
+Time step    4001  t =   2.5368276e+01
+Time step    5001  t =   3.1708760e+01
+Time step    6001  t =   3.8049244e+01
+Time step    7001  t =   4.4389728e+01
+Time step    8001  t =   5.0730212e+01
+Time step    9001  t =   5.7070696e+01
+Time step    9463  t =   6.0000000e+01
+  Time stepping finished...
+
+   Execution time, time stepping phase 44 minutes 3.91527174e+01 seconds 
+  ==> Max wallclock time to write time-series data is 1.55117989e-01 seconds.
+============================================================
+ program sw4 finished! 
+============================================================
+----------------------------------------------------------------
+            sw4 version 3.0
+
+ This program comes with ABSOLUTELY NO WARRANTY; released under GPL.
+ This is free software, and you are welcome to redistribute     
+ it under certain conditions, see LICENSE.txt for more details  
+----------------------------------------------------------------
+  Compiled on: Fri Dec 20 11:35:38 PST 2024
+  By user:     ford17
+  Machine:     ruby967
+  Compiler:    /usr/tce/packages/mvapich2/mvapich2-2.3.7-intel-classic-2021.6.0/bin/mpicxx
+  3rd party include dir: /usr/apps/wpp/include, and library dir: /usr/apps/wpp/lib
+----------------------------------------------------------------
+
+Input file: myy.sw4in
+
+* Processing the grid command...
+* Setting nx to 701 to be consistent with h=1.00000000e+02
+* Setting ny to 351 to be consistent with h=1.00000000e+02
+* Setting nz to 501 to be consistent with h=1.00000000e+02
+ Number of curvilinear grids = 0
+ Number of Cartesian grids = 2
+ Total number of grids = 2
+
+*** No topography command found in input file. Using z=0 as free surface boundary ***
+
+
+Global grid sizes (without ghost points)
+Grid         h        Nx        Ny        Nz       Points      Type
+   0       100       701       351       151     37153701     Cartesian
+   1        50      1401       701       701    688452801     Cartesian
+Total number of grid points (without ghost points): 7.25607e+08
+
+
+Read station input, took 1.77145004e-04seconds.
+
+   Execution time, reading input file 5.36739826e-02 seconds 
+----------------------------------------------------
+ Making Directory: myy.dir/
+		
+... Done!
+----------------------------------------------------
+Geographic and Cartesian coordinates of the corners of the computational grid:
+0: Lon= -1.180000e+02, Lat=3.700000e+01, x=0.000000e+00, y=0.000000e+00
+1: Lon= -1.180000e+02, Lat=3.762882e+01, x=7.000000e+04, y=0.000000e+00
+2: Lon= -1.176030e+02, Lat=3.762882e+01, x=7.000000e+04, y=3.500000e+04
+3: Lon= -1.176063e+02, Lat=3.700000e+01, x=0.000000e+00, y=3.500000e+04
+
+Considering all material blocks
+block command: outside = 0, material = 732975414
+block command: outside = 40592106, material = 692383308
+block command: outside = 571910850, material = 161064564
+block command: outside = 691727172, material = 41248242
+
+       ----------- Material properties ranges ---------------
+       2.21500000e+03 kg/m^3 <=  Density <= 3.27600000e+03 kg/m^3
+       3.40650000e+03 m/s    <=  Vp      <= 7.90000000e+03 m/s
+       2.00890000e+03 m/s    <=  Vs      <= 4.62000000e+03 m/s
+       1.68254787e+00        <=  Vp/Vs   <= 1.70995671e+00
+       8.93902945e+09 Pa     <=  mu      <= 6.99242544e+10 Pa
+       7.82533768e+09 Pa     <=  lambda  <= 6.46066512e+10 Pa
+       ------------------------------------------------------
+
+***** PPW = minVs/h/maxFrequency ********
+g=0, h=1.000000e+02, minVs/h=37.565 (Cartesian)
+g=1, h=5.000000e+01, minVs/h=40.178 (Cartesian)
+
+  time step = 6.34048399e-03
+
+   Execution time, start up phase 1.98931694e-01 seconds 
+Running sw4 on 2016 processors...
+Writing output to directory: myy.dir/
+============================================================
+ Running program on 2016 MPI tasks using the following data: 
+
+ Start Time = 0 Goal Time = 60
+ Number of time steps = 9463 dt: 0.00634048
+
+-----------------------------------------------------------------------
+  Total seismic moment (M0): 7.07107e+17 Nm 
+  Moment magnitude     (Mw): 5.83299
+  Number of moment sources 1
+-----------------------------------------------------------------------
+
+   Execution time, initial data phase 7.54203796e-02 seconds 
+
+  Begin time stepping...
+Time step       1  t =   6.3404840e-03
+writing image plane on file myy.dir/image.cycle=0001.y=0.s.sw4img
+Time step    1001  t =   6.3468245e+00
+Time step    2001  t =   1.2687308e+01
+Time step    3001  t =   1.9027792e+01
+Time step    4001  t =   2.5368276e+01
+Time step    5001  t =   3.1708760e+01
+Time step    6001  t =   3.8049244e+01
+Time step    7001  t =   4.4389728e+01
+Time step    8001  t =   5.0730212e+01
+Time step    9001  t =   5.7070696e+01
+Time step    9463  t =   6.0000000e+01
+  Time stepping finished...
+
+   Execution time, time stepping phase 44 minutes 5.00803142e+01 seconds 
+  ==> Max wallclock time to write time-series data is 1.66022301e-01 seconds.
+============================================================
+ program sw4 finished! 
+============================================================
+----------------------------------------------------------------
+            sw4 version 3.0
+
+ This program comes with ABSOLUTELY NO WARRANTY; released under GPL.
+ This is free software, and you are welcome to redistribute     
+ it under certain conditions, see LICENSE.txt for more details  
+----------------------------------------------------------------
+  Compiled on: Fri Dec 20 11:35:38 PST 2024
+  By user:     ford17
+  Machine:     ruby967
+  Compiler:    /usr/tce/packages/mvapich2/mvapich2-2.3.7-intel-classic-2021.6.0/bin/mpicxx
+  3rd party include dir: /usr/apps/wpp/include, and library dir: /usr/apps/wpp/lib
+----------------------------------------------------------------
+
+Input file: mzz.sw4in
+
+* Processing the grid command...
+* Setting nx to 701 to be consistent with h=1.00000000e+02
+* Setting ny to 351 to be consistent with h=1.00000000e+02
+* Setting nz to 501 to be consistent with h=1.00000000e+02
+ Number of curvilinear grids = 0
+ Number of Cartesian grids = 2
+ Total number of grids = 2
+
+*** No topography command found in input file. Using z=0 as free surface boundary ***
+
+
+Global grid sizes (without ghost points)
+Grid         h        Nx        Ny        Nz       Points      Type
+   0       100       701       351       151     37153701     Cartesian
+   1        50      1401       701       701    688452801     Cartesian
+Total number of grid points (without ghost points): 7.25607e+08
+
+
+Read station input, took 1.95264816e-04seconds.
+
+   Execution time, reading input file 5.57017326e-02 seconds 
+----------------------------------------------------
+ Making Directory: mzz.dir/
+		
+... Done!
+----------------------------------------------------
+Geographic and Cartesian coordinates of the corners of the computational grid:
+0: Lon= -1.180000e+02, Lat=3.700000e+01, x=0.000000e+00, y=0.000000e+00
+1: Lon= -1.180000e+02, Lat=3.762882e+01, x=7.000000e+04, y=0.000000e+00
+2: Lon= -1.176030e+02, Lat=3.762882e+01, x=7.000000e+04, y=3.500000e+04
+3: Lon= -1.176063e+02, Lat=3.700000e+01, x=0.000000e+00, y=3.500000e+04
+
+Considering all material blocks
+block command: outside = 0, material = 732975414
+block command: outside = 40592106, material = 692383308
+block command: outside = 571910850, material = 161064564
+block command: outside = 691727172, material = 41248242
+
+       ----------- Material properties ranges ---------------
+       2.21500000e+03 kg/m^3 <=  Density <= 3.27600000e+03 kg/m^3
+       3.40650000e+03 m/s    <=  Vp      <= 7.90000000e+03 m/s
+       2.00890000e+03 m/s    <=  Vs      <= 4.62000000e+03 m/s
+       1.68254787e+00        <=  Vp/Vs   <= 1.70995671e+00
+       8.93902945e+09 Pa     <=  mu      <= 6.99242544e+10 Pa
+       7.82533768e+09 Pa     <=  lambda  <= 6.46066512e+10 Pa
+       ------------------------------------------------------
+
+***** PPW = minVs/h/maxFrequency ********
+g=0, h=1.000000e+02, minVs/h=37.565 (Cartesian)
+g=1, h=5.000000e+01, minVs/h=40.178 (Cartesian)
+
+  time step = 6.34048399e-03
+
+   Execution time, start up phase 2.13234663e-01 seconds 
+Running sw4 on 2016 processors...
+Writing output to directory: mzz.dir/
+============================================================
+ Running program on 2016 MPI tasks using the following data: 
+
+ Start Time = 0 Goal Time = 60
+ Number of time steps = 9463 dt: 0.00634048
+
+-----------------------------------------------------------------------
+  Total seismic moment (M0): 7.07107e+17 Nm 
+  Moment magnitude     (Mw): 5.83299
+  Number of moment sources 1
+-----------------------------------------------------------------------
+
+   Execution time, initial data phase 7.74326324e-02 seconds 
+
+  Begin time stepping...
+Time step       1  t =   6.3404840e-03
+writing image plane on file mzz.dir/image.cycle=0001.y=0.s.sw4img
+Time step    1001  t =   6.3468245e+00
+Time step    2001  t =   1.2687308e+01
+Time step    3001  t =   1.9027792e+01
+Time step    4001  t =   2.5368276e+01
+Time step    5001  t =   3.1708760e+01
+Time step    6001  t =   3.8049244e+01
+Time step    7001  t =   4.4389728e+01
+Time step    8001  t =   5.0730212e+01
+Time step    9001  t =   5.7070696e+01
+Time step    9463  t =   6.0000000e+01
+  Time stepping finished...
+
+   Execution time, time stepping phase 44 minutes 4.80154808e+01 seconds 
+  ==> Max wallclock time to write time-series data is 1.55447960e-01 seconds.
+============================================================
+ program sw4 finished! 
+============================================================

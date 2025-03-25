@@ -1,0 +1,13 @@
+fileio pfs=1 nwriters=16 path=mxx.dir printcycle=1000
+grid x=70e3 y=35e3 z=50e3 h=100
+time t=60
+# time steps=1
+refinement zmax=35000
+block vp=7900.0 vs=4620.0 rho=3276.0 qp=60976 qs=27027
+block vp=6352.0 vs=3756.5 rho=2805.6 qp=658 qs=293 z2=35000
+block vp=5544.5 vs=3295.3 rho=2608.9 qp=287 qs=128 z2=8000
+block vp=3406.5 vs=2008.9 rho=2215.0 qp=331 qs=147 z2=1900
+source x=10e3 y=0 z=10e3 mxx=1e18 type=Dirac
+rec x=60e3 y=0 z=0 file=rec sacformat=1
+image mode=s y=0 cycle=1
+
