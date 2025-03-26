@@ -1,15 +1,14 @@
 ---
 date: last-modified
-title: |
-    SW4 for Chandan
+title: SW4 for Chandan
+subtitle: Kindly do it
 author:
-  - name: Sean R. Ford
-    orcid: 0000-0002-0376-5792
-    email: sean@llnl.gov
-    corresponding: true
-    affiliation: [{id: llnl, name: Lawrence Livermore National Laboratory, city: Livermore, country: USA, state: California, postal-code: 94550}]
-abstract: |
-    Can you run MZZ, MXX, MYY seismograms for a layered medium in your SW4 and send  me the out output with the model? Kindly do it.
+  name: Sean R. Ford
+  orcid: 0000-0002-0376-5792
+  email: sean@llnl.gov
+  affiliation: Lawrence Livermore National Laboratory
+# abstract: |
+    # Can you run MZZ, MXX, MYY seismograms for a layered medium in your SW4 and send me the output with the model? Kindly do it.
 # bibliography: sw4-for-chandan.bib
 number-sections: true
 format:
@@ -20,13 +19,16 @@ format:
     echo: false
     default-image-extension: pdf
     fig-pos: 'htbp'
+    keep-tex: false
 execute:
   cache: true
   freeze: true # auto
-jupyter: python3
+# jupyter: python3
 ---
 
 # Introduction
+
+Chandan asked, "Can you run MZZ, MXX, MYY seismograms for a layered medium in your SW4 and send me the output with the model?"
 
 We obtained [SW4](https://computing.llnl.gov/projects/serpentine-wave-propagation) 
 [v3.0](https://github.com/geodynamics/sw4/releases/tag/v3.0)
@@ -35,24 +37,16 @@ and compiled on macos with [MPICH](https://www.mpich.org)
 using the following `make.inc` file:
 ```
 proj = yes
+# homebrew version of proj is fine
 SW4ROOT = /opt/homebrew
 fftw = yes
-# homebrew version uses openmpi so installed our own for mpich
+# homebrew version uses openmpi so installed fftw for mpich
 FFTWHOME = /Users/ford17/Applications/fftw-3.3.10
 FC = mpif90
 CXX = mpicxx
+# need Accelerate for blas on macos
 EXTRA_LINK_FLAGS = -framework Accelerate -L/opt/homebrew/lib/gcc/current -lgfortran
 ```
-
-
-# Verification
-
-We reproduce the results from the [excellent tutorial](https://rbherrmann.github.io/ComputerProgramsSeismology/TUTORIAL/SW4CPS/index.html) 
-by [Bob Herrmann](https://www.slu.edu/science-and-engineering/academics/earth-atmospheric-sciences/faculty/herrmann-robert.php)
-who compared SW4 with [CPS](https://rbherrmann.github.io/ComputerProgramsSeismology/index.html)
-and found "excellent agreement".
-
-Bob used a triangular pulse source-time function and convolved the recordings with a triangle of 1 s duration.
 
 
 # Method
@@ -63,7 +57,7 @@ The requirements are:
 - Source at (x,y,z) = (10, 0, 10)
 - WUS model
 - PPW for 5 Hz
-- Dirac source
+- Dirac (delta) source
 
 So we use the following SW4 input `run.sw4in` file:
 ```
@@ -111,43 +105,116 @@ srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 myy.sw4in
 srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 mzz.sw4in
 ```
 
-
-# Results
-
 Our goal for an accurate calculation is to have a minimum points per wavelength (PPW) of between 6 and 10.
-The PPW is related to the smallest wave velocity $v$ [m/s] divided by the grid spacing $h$ [m]divided by the maximum frequency represented $f$ [1/s]. and For the two grids (one grid with one refinement) the points per wavelength (PPW) for a 5 Hz maximum frequency is:
+The PPW is related to the smallest wave velocity $v$ [m/s] divided by the grid spacing $h$ [m] divided by the maximum frequency represented $f$ [1/s]. For the grid used here ($v = 2008.9$ m/s, $h = 50$ m) the points per wavelength for a 5 Hz maximum frequency is:
 
 $$
 \text{PPW} = v / h / f = 2008.9 / 50 / 5 \approxeq 8 
 $$
+
+
+# Results
+
+The shear wave velocity model is shown in @fig-model.
+
+```{python}
+%%script bash
+
+visit -cli -nowin -quiet << FIN &> /dev/null
+#
+OpenDatabase("/Users/ford17/Development/sw4-for-chandan/SW4/mxx.dir/image.cycle=0001.y=0.s.sw4img")
+AddPlot("Pseudocolor", "cs")
+DrawPlots()
+#
+# View3DAtts = View3DAttributes()
+View3DAtts = GetView3D()  # This is better since it gets the window optimized attributes
+View3DAtts.viewNormal = (0, 1, 0)
+View3DAtts.viewUp = (0, 0, -1)
+SetView3D(View3DAtts)
+#
+# s.screenCapture = 0 
+SaveWindowAtts = SaveWindowAttributes()
+# SaveWindowAtts.outputToCurrentDirectory = 0  # required
+# SaveWindowAtts.outputDirectory = "/Users/Ford17/Development/sw4-for-chandan/images"
+SaveWindowAtts.outputToCurrentDirectory = 1
+SaveWindowAtts.fileName = "fig-model"
+SaveWindowAtts.family = 0  # do not append number
+SaveWindowAtts.format = SaveWindowAtts.POSTSCRIPT  # BMP, JPEG, PNG, POSTSCRIPT, PPM, RGB, STL, TIFF, ULTRA, VTK
+SaveWindowAtts.width = 2048
+SaveWindowAtts.height = 2048
+SetSaveWindowAttributes(SaveWindowAtts)
+SaveWindow()
+#
+quit()
+FIN
+
+gmt psconvert fig-model.ps -A -Tfg
+
+/bin/rm visitlog.py
+```
+
+![Shear wave velocity model plotted with [VisIt](https://visit.llnl.gov/)](fig-model){#fig-model}
 
 Calculated displacements low passed at 5 Hz are shown in @fig-results.
 
 ```{python}
 #| label: fig-results
 #| fig-cap: "Calculated displacements low passed at 5 Hz plotted with [ObsPy](https://www.obspy.org)."
+#| fig-subcap:
+#|   - "MXX"
+#|   - "MYY"
+#|   - "MZZ"
+#| layout-nrow: 3
 
 # import matplotlib.pyplot as plt
-# import pandas as pd
 from obspy import read
 
-stream = read("Run/mxx.dir/rec.?", format="SAC")
-stream.filter('lowpass', freq=5.0)
-stream.plot();
+for comp in ("mxx", "myy", "mzz"):
+    stream = read("SW4/"+comp+".dir/rec.?", format="SAC")
+    b = stream[0].stats.starttime; ti = b+5; tf = b+35;
+    stream.filter('lowpass', freq=5.0)
+    # print(comp)
+    for tr in stream:
+        tr.stats.station = comp
+    stream.plot(starttime=b+5, endtime=b+35, type='relative');
 ```
 
-The shear wave velocity model is shown in @fig-model.
+
+# Comparison with CPS
+
+Dispalcements are also calculated using [CPS](https://rbherrmann.github.io/ComputerProgramsSeismology/index.html)
+and shown in @fig-cps.
+
+[Bob Herrmann](https://www.slu.edu/science-and-engineering/academics/earth-atmospheric-sciences/faculty/herrmann-robert.php)
+produced an
+[excellent tutorial](https://rbherrmann.github.io/ComputerProgramsSeismology/TUTORIAL/SW4CPS/index.html)
+that guided our work here.
+In that tutorial, Bob found "execellent agreement" between SW4 and CPS.
+<!-- Bob used a triangular pulse source-time function and convolved the recordings with a triangle of 1 s duration. -->
+<!-- The Z, N and E synthetics thus created are for moment tensor elements of 1.0e+25 dyne-cm. The equivalent strengths used in the SW4 simulations are a moment of 1.0e+18 nt-m. -->
 
 ```{python}
-#| label: fig-model
-#| fig-cap: "Shear wave velocity model plotted with [VisIt](https://visit.llnl.gov/)"
+#| label: fig-cps
+#| fig-cap: "Calculated displacements using CPS low passed at 5 Hz plotted with [ObsPy](https://www.obspy.org)."
+#| fig-subcap:
+#|   - "MXX"
+#|   - "MYY"
+#|   - "MZZ"
+#| layout-nrow: 3
 
-from os import system
+# import matplotlib.pyplot as plt
+from obspy import read
 
-# system write a file called fig-model.py
-
-# system("visit -cli -nowin -s fig-model.py");
-
+for comp in ("XX", "YY", "ZZ"):
+    stream = read("CPS/"+comp+"/006000100.?0", format="SAC")
+    b = stream[0].stats.starttime; ti = b+5; tf = b+35;
+    stream.filter('lowpass', freq=5.0)
+    # print(comp)
+    for tr in stream:
+        tr.stats.station = comp
+    stream.plot(starttime=b+9, endtime=b+39, type='relative');
 ```
 
-<!-- ![Shear wave velocity model plotted with [VisIt](https://visit.llnl.gov/)](Figures/fig-model){#fig-model} -->
+# Conclusions
+
+SW4 and CPS are excellent tools for wavefield calculations.
