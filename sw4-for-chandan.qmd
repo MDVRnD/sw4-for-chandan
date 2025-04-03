@@ -57,7 +57,7 @@ The requirements are:
 - Source at (x,y,z) = (10, 0, 10)
 - WUS model
 - PPW for 5 Hz
-- Dirac (delta) source
+- Dirac (delta) and Triangle (freq=1) source
 
 So we use the following SW4 input `run.sw4in` file:
 ```
@@ -70,7 +70,8 @@ block vp=6352.0 vs=3756.5 rho=2805.6 qp=658 qs=293 z2=35000
 block vp=5544.5 vs=3295.3 rho=2608.9 qp=287 qs=128 z2=8000
 block vp=3406.5 vs=2008.9 rho=2215.0 qp=331 qs=147 z2=1900
 source x=10e3 y=0 z=10e3 mxx=1e18 type=Dirac
-rec x=60e3 y=0 z=0 file=rec sacformat=1
+#source x=10e3 y=0 z=10e3 mxx=1e18 type=Triangle freq=1
+rec x=60e3 y=0 z=0 file=rec50 sacformat=1
 image mode=s y=0 cycle=1
 ```
 

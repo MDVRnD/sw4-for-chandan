@@ -2,4 +2,4 @@
 
 sw4dir="$HOME/Applications/sw4-3.0/optimize"
 
-mpirun -np 16 $sw4dir/sw4 mxx.sw4in
+mpirun -np 16 $sw4dir/sw4 run.sw4in

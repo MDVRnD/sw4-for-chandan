@@ -1,7 +1,7 @@
 #!/bin/tcsh
-#SBATCH -N 36
+#SBATCH -N 50
 #SBATCH -J run
-#SBATCH -t 360
+#SBATCH -t 100
 #SBATCH -p pbatch
 #SBATCH --license=lustre1
 #SBATCH -A gmp
@@ -9,7 +9,7 @@
 #SBATCH -e run.sw4err
 
 # Max: 1440 minutes (24 hours) on 520 nodes
-# 726 million pts took 45 minutes on 36 nodes (3 runs takes 135 minutes)
+# 48 nodes took 75 min (all 3) for 45 sec of sim time
 
 # Set CPUS/nodes for RUBY (limit 520 nodes for 24 hours)
 @ CPUSPERNODE = 56
@@ -20,6 +20,7 @@ srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 mxx.sw4in
 srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 myy.sw4in
 srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 mzz.sw4in
 
-# sbatch runruby.sw4run
+# sbatch run_gdl_batch_quartz
+# showq
 # (deprecated) checkjob JOBID
 # scontrol show job JOBID
