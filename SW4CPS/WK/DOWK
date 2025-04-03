@@ -1,0 +1,94 @@
+#!/bin/sh
+
+#####
+# clean up
+#####
+rm -f 00*.[ZRT]??
+rm *_Z *_N *_E
+
+cat > dfile << EOF
+5.0 0.025 512 0 0
+EOF
+
+
+cat > HALF.mod << EOF
+MODEL.01
+Simple halfspace model
+ISOTROPIC
+KGS
+FLAT EARTH
+1-D
+CONSTANT VELOCITY
+LINE08
+LINE09
+LINE10
+LINE11
+  H(KM) VP(KM/S) VS(KM/S) RHO(GM/CC)   QP   QS  ETAP  ETAS  FREFP  FREFS
+ 40.0000  6.0000  3.464  2.70 0 0 0 0 1 1
+EOF
+
+hprep96 -d dfile -M HALF.mod -TF -BH -ALL -HS 5.0 -HR 0.0
+hspec96
+# pulse durection for parabolic pulse is 4 * 4 DT = 4 *4/40 = 0.4s
+#hpulse96 -V -p -l 4 | f96tosac -GRN
+# pulse durection for triangle pulse is 8 * 2 DT = 8 *2/40 = 0.4s
+#hpulse96 -V -t -l 8 | f96tosac -GRN
+# make a good tynthetics this will be low-pass filtered later
+hpulse96 -V -p -l 1 | f96tosac -GRN
+
+#####
+#    now make synthetics for a given moment tensor
+#    at azimuths of 0 to 90 degrees
+#####
+mxy=1e18  # nt-m
+MXY=1.0e+25 # dyne-cm
+MOM=1.0e+25
+ZSSFILE=`ls *.ZSS | head -1`
+PROTO=`basename $ZSSFILE .ZSS`
+#####
+#   make moment tensor elements
+#####
+for MIJ in MXX MXY MXZ MYY MYZ MZZ
+do
+for AZ in 000.0 022.5 045.0 067.5 090.0 112.5 135.0 157.5 180.0
+do
+	BAZ=`echo $AZ | awk '{print $1 + 180.}'`
+gsac << EOF
+mt to ZNE AZ ${AZ} BAZ ${BAZ} ${MIJ} ${MOM} FILE ${PROTO}
+w
+mv T.Z ${MIJ}_${AZ}_Z
+mv T.N ${MIJ}_${AZ}_N
+mv T.E ${MIJ}_${AZ}_E
+mt to ZRT AZ ${AZ} BAZ ${BAZ} ${MIJ} ${MOM} FILE ${PROTO}
+w
+mv T.R ${MIJ}_${AZ}_R
+mv T.T ${MIJ}_${AZ}_T
+q
+EOF
+rm -f T.Z
+done
+done
+#####
+#   make force  elements
+#####
+FORCE=1.0e+20
+for F in FN FE FD
+do
+for AZ in 000.0 022.5 045.0 067.5 090.0 112.5 135.0 157.5 180.0
+do
+	BAZ=`echo $AZ | awk '{print $1 + 180.}'`
+gsac << EOF
+mt to ZNE AZ ${AZ} BAZ ${BAZ} ${F} ${FORCE} FILE ${PROTO}
+w
+mv T.Z ${F}_${AZ}_Z
+mv T.N ${F}_${AZ}_N
+mv T.E ${F}_${AZ}_E
+mt to ZRT AZ ${AZ} BAZ ${BAZ} ${MIJ} ${MOM} FILE ${PROTO}
+w
+mv T.R ${F}_${AZ}_R
+mv T.T ${F}_${AZ}_T
+q
+EOF
+rm -f T.Z
+done
+done

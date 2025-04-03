@@ -1,0 +1,14 @@
+#!/bin/sh
+
+export PATH=:.:$PATH
+
+mpirun -np 3 sw4 mxx.in
+mpirun -np 3 sw4 mxy.in
+mpirun -np 3 sw4 mxz.in
+mpirun -np 3 sw4 myy.in
+mpirun -np 3 sw4 myz.in
+mpirun -np 3 sw4 mzz.in
+
+mpirun -np 3 sw4 fx.in
+mpirun -np 3 sw4 fy.in
+mpirun -np 3 sw4 fz.in

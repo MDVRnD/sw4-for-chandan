@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sean R. Ford">
+<meta name="dcterms.date" content="2025-04-02">
+
+<title>SW4 for Chandan</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="sw4-for-chandan_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sw4-for-chandan_files/libs/quarto-html/quarto.js"></script>
+<script src="sw4-for-chandan_files/libs/quarto-html/popper.min.js"></script>
+<script src="sw4-for-chandan_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="sw4-for-chandan_files/libs/quarto-html/anchor.min.js"></script>
+<link href="sw4-for-chandan_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sw4-for-chandan_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="sw4-for-chandan_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="sw4-for-chandan_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="sw4-for-chandan_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="sw4-for-chandan.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">SW4 for Chandan</h1>
+<p class="subtitle lead">Kindly do it</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Sean R. Ford <a href="mailto:sean@llnl.gov" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-0376-5792" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Lawrence Livermore National Laboratory
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 2, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>Chandan asked, “Can you run MZZ, MXX, MYY seismograms for a layered medium in your SW4 and send me the output with the model?”</p>
+<p>We obtained <a href="https://computing.llnl.gov/projects/serpentine-wave-propagation">SW4</a> <a href="https://github.com/geodynamics/sw4/releases/tag/v3.0">v3.0</a> from <a href="https://github.com/geodynamics/sw4">GitHub</a> and compiled on macos with <a href="https://www.mpich.org">MPICH</a> using the following <code>make.inc</code> file:</p>
+<pre><code>proj = yes
+# homebrew version of proj is fine
+SW4ROOT = /opt/homebrew
+fftw = yes
+# homebrew version uses openmpi so installed fftw for mpich
+FFTWHOME = /Users/ford17/Applications/fftw-3.3.10
+FC = mpif90
+CXX = mpicxx
+# need Accelerate for blas on macos
+EXTRA_LINK_FLAGS = -framework Accelerate -L/opt/homebrew/lib/gcc/current -lgfortran</code></pre>
+</section>
+<section id="method" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Method</h1>
+<p>The requirements are:</p>
+<ul>
+<li>Station at (x,y,z) = (60, 0, 0)</li>
+<li>Source at (x,y,z) = (10, 0, 10)</li>
+<li>WUS model</li>
+<li>PPW for 5 Hz</li>
+<li>Dirac (delta) source</li>
+</ul>
+<p>So we create an SW4 input files for each source. Below is the input file for <code>mxx.sw4in</code>:</p>
+<pre><code>fileio pfs=1 nwriters=16 path=mxx.dir printcycle=1000
+grid x=70e3 y=20e3 z=50e3 h=50
+time t=45
+block vp=7900.0 vs=4620.0 rho=3276.0 qp=60976 qs=27027
+block vp=6407.5 vs=3768.0 rho=2822.3 qp=901 qs=402 z2=40000
+block vp=6270.8 vs=3739.6 rho=2781.2 qp=658 qs=293 z2=21000
+block vp=5544.5 vs=3295.3 rho=2608.9 qp=287 qs=128 z2=8000
+block vp=3406.5 vs=2008.9 rho=2215.0 qp=331 qs=147 z2=1900
+source x=10e3 y=10e3 z=10e3 mxx=1e18 type=Dirac t0=0
+#source x=10e3 y=10e3 z=10e3 mxx=1e18 type=Triangle t0=0 freq=1
+#source x=10e3 y=10e3 z=10e3 mxx=1e18 type=C6SmoothBump t0=0 freq=1
+rec x=60e3 y=10e3 z=0 file=rec50 sacformat=1
+image mode=s y=10e3 cycle=1
+
+</code></pre>
+<p>Note that we could have used refinement at the lowest layer for a more efficient calculation.</p>
+<p>And to calculate the results we could use the command:</p>
+<pre><code>&gt; mpirun -np 16 sw4 mxx.sw4in</code></pre>
+<p>In practice we used many more processors available on ruby from <a href="https://hpc.llnl.gov">LC</a> with a slurm script, <code>runruby.sw4run</code>:</p>
+<pre><code>#!/bin/tcsh
+#SBATCH -N 50
+#SBATCH -J run
+#SBATCH -t 500
+#SBATCH -p pbatch
+#SBATCH --license=lustre1
+#SBATCH -A gmp
+#SBATCH -o run.sw4out
+#SBATCH -e run.sw4err
+
+# Max: 1440 minutes (24 hours) on 520 nodes
+# 50 nodes took 15 minutes per run (9 runs = 135 minutes)
+
+# Set CPUS/nodes for RUBY (limit 520 nodes for 24 hours)
+@ CPUSPERNODE = 56
+# Compute number of CPUs
+@ NCPUS = ( $SLURM_JOB_NUM_NODES * $CPUSPERNODE )
+
+srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 mxx.sw4in
+srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 myy.sw4in
+srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 mzz.sw4in
+srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 mxy.sw4in
+srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 mxz.sw4in
+srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 myz.sw4in
+srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 fx.sw4in
+srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 fy.sw4in
+srun -n$NCPUS /usr/workspace/ford17/sw4/optimize_ruby_mp/sw4 fz.sw4in
+
+</code></pre>
+<p>And then we execute the script with:</p>
+<pre><code>&gt; sbatch runruby.sw4run</code></pre>
+<p>Our goal for an accurate calculation is to have a minimum points per wavelength (PPW) of between 6 and 10. The PPW is related to the smallest wave velocity <span class="math inline">\(v\)</span> [m/s] divided by the grid spacing <span class="math inline">\(h\)</span> [m] divided by the maximum frequency represented <span class="math inline">\(f\)</span> [1/s]. For the grid used here (<span class="math inline">\(v = 2008.9\)</span> m/s, <span class="math inline">\(h = 50\)</span> m) the points per wavelength for a 5 Hz maximum frequency is:</p>
+<p><span class="math display">\[
+\text{PPW} = v / h / f = 2008.9 / 50 / 5 \approxeq 8
+\]</span></p>
+</section>
+<section id="results" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Results</h1>
+<p>The shear wave velocity model is shown in <a href="#fig-model" class="quarto-xref">Figure&nbsp;1</a>.</p>
+<div id="829a0b1c" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>script bash</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>visit <span class="op">-</span>cli <span class="op">-</span>nowin <span class="op">-</span>quiet <span class="op">&lt;&lt;</span> FIN <span class="op">&amp;&gt;</span> <span class="op">/</span>dev<span class="op">/</span>null</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>OpenDatabase(<span class="st">"/Users/ford17/Development/sw4-for-chandan/SW4/mxx.dir/image.cycle=0001.y=10000.s.sw4img"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>AddPlot(<span class="st">"Pseudocolor"</span>, <span class="st">"cs"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>DrawPlots()</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># View3DAtts = View3DAttributes()</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>View3DAtts <span class="op">=</span> GetView3D()  <span class="co"># This is better since it gets the window optimized attributes</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>View3DAtts.viewNormal <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>View3DAtts.viewUp <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>SetView3D(View3DAtts)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># s.screenCapture = 0 </span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>SaveWindowAtts <span class="op">=</span> SaveWindowAttributes()</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># SaveWindowAtts.outputToCurrentDirectory = 0  # required</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># SaveWindowAtts.outputDirectory = "/Users/Ford17/Development/sw4-for-chandan/images"</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>SaveWindowAtts.outputToCurrentDirectory <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>SaveWindowAtts.fileName <span class="op">=</span> <span class="st">"fig-model"</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>SaveWindowAtts.family <span class="op">=</span> <span class="dv">0</span>  <span class="co"># do not append number</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>SaveWindowAtts.<span class="bu">format</span> <span class="op">=</span> SaveWindowAtts.POSTSCRIPT  <span class="co"># BMP, JPEG, PNG, POSTSCRIPT, PPM, RGB, STL, TIFF, ULTRA, VTK</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>SaveWindowAtts.width <span class="op">=</span> <span class="dv">2048</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>SaveWindowAtts.height <span class="op">=</span> <span class="dv">2048</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>SetSaveWindowAttributes(SaveWindowAtts)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>SaveWindow()</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>quit()</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>FIN</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>gmt psconvert fig<span class="op">-</span>model.ps <span class="op">-</span>A <span class="op">-</span>Tfg</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="op">/</span><span class="bu">bin</span><span class="op">/</span>rm visitlog.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="fig-model" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig-model.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-model-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Shear wave velocity model plotted with <a href="https://visit.llnl.gov/">VisIt</a>
+</figcaption>
+</figure>
+</div>
+<p>Calculated velocities bandpassed between 20 s and 5 Hz are shown in <a href="#fig-results" class="quarto-xref">Figure&nbsp;2</a>.</p>
+<div id="cell-fig-results" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> obspy <span class="im">import</span> UTCDateTime, Stream, read</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>stream <span class="op">=</span> Stream()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> comp <span class="kw">in</span> (<span class="st">"mxx"</span>, <span class="st">"myy"</span>, <span class="st">"mzz"</span>):</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    streamcomp <span class="op">=</span> read(<span class="st">"SW4/"</span><span class="op">+</span>comp<span class="op">+</span><span class="st">".dir/rec50.?"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">"SAC"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> tr <span class="kw">in</span> streamcomp:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        tr.stats.station <span class="op">=</span> comp</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        tr.stats.starttime <span class="op">=</span> UTCDateTime()</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    stream <span class="op">+=</span> streamcomp</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>stream.<span class="bu">filter</span>(<span class="st">'bandpass'</span>, freqmin<span class="op">=</span><span class="fl">0.05</span>, freqmax<span class="op">=</span><span class="fl">5.00</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>stream.plot(<span class="bu">type</span><span class="op">=</span><span class="st">'relative'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-results" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="sw4-for-chandan_files/figure-html/fig-results-output-1.png" width="745" height="2236" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Calculated displacements low passed at 5 Hz plotted with <a href="https://www.obspy.org">ObsPy</a>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="comparison-with-cps" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Comparison with CPS</h1>
+<p>Dispalcements are also calculated using <a href="https://rbherrmann.github.io/ComputerProgramsSeismology/index.html">CPS</a> and shown in <a href="#fig-cps" class="quarto-xref">Figure&nbsp;3</a>.</p>
+<p><a href="https://www.slu.edu/science-and-engineering/academics/earth-atmospheric-sciences/faculty/herrmann-robert.php">Bob Herrmann</a> produced an <a href="https://rbherrmann.github.io/ComputerProgramsSeismology/TUTORIAL/SW4CPS/index.html">excellent tutorial</a> that guided our work here. In that tutorial, Bob found “execellent agreement” between SW4 and CPS. <!-- Bob used a triangular pulse source-time function and convolved the recordings with a triangle of 1 s duration. --> <!-- The Z, N and E synthetics thus created are for moment tensor elements of 1.0e+25 dyne-cm. The equivalent strengths used in the SW4 simulations are a moment of 1.0e+18 nt-m. --></p>
+<p>We use the script <code>DOIT.sh</code> to run the CPS codes:</p>
+<pre><code>#!/usr/bin/env bash
+
+## Any layered model
+cat &gt; WUSnoQ.mod &lt;&lt; FIN
+MODEL.01
+Model after     8 iterations
+ISOTROPIC
+KGS
+FLAT EARTH
+1-D
+CONSTANT VELOCITY
+LINE08
+LINE09
+LINE10
+LINE11
+  H(KM) VP(KM/S) VS(KM/S) RHO(GM/CC) QP QS ETAP ETAS FREFP FREFS
+ 1.9000   3.4065   2.0089     2.2150  0  0 0.00 0.00  1.00  1.00
+ 6.1000   5.5445   3.2953     2.6089  0  0 0.00 0.00  1.00  1.00
+13.0000   6.2708   3.7396     2.7812  0  0 0.00 0.00  1.00  1.00
+19.0000   6.4075   3.7680     2.8223  0  0 0.00 0.00  1.00  1.00
+ 0.0000   7.9000   4.6200     3.2760  0  0 0.00 0.00  1.00  1.00
+FIN
+
+## Recording at 50 km with Nyquist above 5 Hz
+# DIST DT NPTS T0 VRED
+echo "50 0.01 4096 0 0" &gt; dfile
+
+## Run
+rm -fr hspec96.*
+hprep96 -M WUSnoQ.mod -d dfile -HS 10
+hspec96
+
+## Output
+# Triangle is 2 * L * dt = 2 * 25 * 0.02 = 1
+# hpulse96 -V -t -l 25 | f96tosac -G
+# Impulse
+hpulse96 -V -i | f96tosac -G
+
+## Put in mechanism
+# 1e18 nt-m = 1e25 dyne-cm
+MOM=1.0e+25
+ZSSFILE=`ls *.ZSS | head -1`
+PROTO=`basename $ZSSFILE .ZSS`
+for MIJ in MXX MXY MXZ MYY MYZ MZZ
+do
+gsac &lt;&lt; EOF
+mt to ZNE AZ 0 BAZ 180 ${MIJ} ${MOM} FILE ${PROTO}
+w
+mv T.Z ${MIJ}_${PROTO}_Z
+mv T.N ${MIJ}_${PROTO}_N
+mv T.E ${MIJ}_${PROTO}_E
+q
+EOF
+done
+FORCE=1.0e+20
+for F in FN FE FD
+do
+gsac &lt;&lt; EOF
+mt to ZNE AZ 0 BAZ 180 ${F} ${FORCE} FILE ${PROTO}
+w
+mv T.Z ${F}_${PROTO}_Z
+mv T.N ${F}_${PROTO}_N
+mv T.E ${F}_${PROTO}_E
+q
+EOF
+done
+</code></pre>
+<div id="cell-fig-cps" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> obspy <span class="im">import</span> UTCDateTime, Stream, read</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>stream <span class="op">=</span> Stream()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> comp <span class="kw">in</span> (<span class="st">"MXX"</span>, <span class="st">"MYY"</span>, <span class="st">"MZZ"</span>):</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    streamcomp <span class="op">=</span> read(<span class="st">"CPS/"</span><span class="op">+</span>comp<span class="op">+</span><span class="st">"_005000100_?"</span>, <span class="bu">format</span><span class="op">=</span><span class="st">"SAC"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> tr <span class="kw">in</span> streamcomp:</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        tr.stats.station <span class="op">=</span> comp</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        tr.stats.starttime <span class="op">=</span> UTCDateTime()</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    stream <span class="op">+=</span> streamcomp</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>stream.<span class="bu">filter</span>(<span class="st">'bandpass'</span>, freqmin<span class="op">=</span><span class="fl">0.05</span>, freqmax<span class="op">=</span><span class="fl">5.00</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>stream.plot(<span class="bu">type</span><span class="op">=</span><span class="st">'relative'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-cps" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="sw4-for-chandan_files/figure-html/fig-cps-output-1.png" width="745" height="2236" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Calculated displacements using CPS low passed at 5 Hz plotted with <a href="https://www.obspy.org">ObsPy</a>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We also calculated the Green’s functions using the <code>strains</code> calculation from SW4. This is obtained via reciprocity where strains at the source location are calculated due to a unit force at the surface. Such an input file for the vertical component can be calculated using the following input file:</p>
+<pre><code>fileio pfs=1 nwriters=16 path=fz.dir printcycle=1000
+grid x=70e3 y=20e3 z=50e3 h=50
+time t=45
+block vp=7900.0 vs=4620.0 rho=3276.0 qp=60976 qs=27027
+block vp=6407.5 vs=3768.0 rho=2822.3 qp=901 qs=402 z2=40000
+block vp=6270.8 vs=3739.6 rho=2781.2 qp=658 qs=293 z2=21000
+block vp=5544.5 vs=3295.3 rho=2608.9 qp=287 qs=128 z2=8000
+block vp=3406.5 vs=2008.9 rho=2215.0 qp=331 qs=147 z2=1900
+source x=60e3 y=10e3 z=0 fz=1e15 type=Dirac t0=0
+#source x=60e3 y=10e3 z=0 fz=1e15 type=Triangle t0=0 freq=1
+#source x=60e3 y=10e3 z=0 fz=1e15 type=C6SmoothBump t0=0 freq=1
+rec x=10e3 y=10e3 z=10e3 file=rec50 sacformat=1 variables=strains
+image mode=s y=10e3 cycle=1
+
+</code></pre>
+</section>
+<section id="conclusions" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Conclusions</h1>
+<p>SW4 and CPS are excellent tools for wavefield calculations.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

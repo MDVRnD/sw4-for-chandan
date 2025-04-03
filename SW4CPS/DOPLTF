@@ -1,0 +1,72 @@
+#!/bin/sh
+# RED is SW4 BLUE is WK
+
+set -x
+rm -f *.PLT
+
+for M in FX FY FD
+do
+	case $M in
+		FX) D="fx" ; T="Fx" ; MM="FN" ;;
+		FY) D="fy" ; T="Fy" ; MM="FE" ;;
+		FD) D="fz" ; T="Fz" ; MM="FD" ;;
+	esac
+	for CMP in Z N E
+	do
+		case $CMP in
+			Z) C="u" ;;
+			N) C="n" ;;
+			E) C="e" ;;
+		esac
+		Y0=8.0
+		rm -f ${M}_${CMP}.PLT
+		# TITLE
+calplt << EOF
+NEWPEN
+1
+CENTER
+4.0 ${Y0} 0.15 "${T} ${CMP}" 0.0
+PEND
+EOF
+cat CALPLT.PLT >> ${M}_${CMP}.PLT
+		for A in 00 01 02 03 04 05 06 07 08
+		do
+			case $A in
+				00) AZ=000.0 ; STA="00" ;;
+				01) AZ=022.5 ; STA="01" ;;
+				02) AZ=045.0 ; STA="02" ;;
+				03) AZ=067.5 ; STA="03" ;;
+				04) AZ=090.0 ; STA="04" ;;
+				05) AZ=112.5 ; STA="05" ;;
+				06) AZ=135.0 ; STA="06" ;;
+				07) AZ=157.5 ; STA="07" ;;
+				08) AZ=180.0 ; STA="08" ;;
+			esac
+			Y0=`echo $Y0 | awk '{print $1 - 0.7 }'`
+			echo ${D}/sta${STA}.${C} WK/${MM}_${AZ}_${CMP}
+gsac << EOF
+cut b b 9
+r ${D}/sta${STA}.${C} WK/${MM}_${AZ}_${CMP}
+triangle w 1.0
+#int
+w SW4 SWK
+q
+EOF
+			pltsac -O -K -1 -DOAMP -XLEN 6.0 -X0 0.5 -Y0 ${Y0} -ABS -YLEN 1.5 SW4 SWK
+			HT=0.10
+			YP=`echo ${Y0} | awk '{print $1 +0.5}' `
+			YM=`echo $YP $HT | awk '{print $1 - 1.5*$2}' `
+			cat PLTSAC.PLT >> ${M}_${CMP}.PLT
+calplt << EOF
+NEWPEN
+1
+RIGHT
+6.5 ${YM} ${HT} "AZ=${AZ}" 0.0
+PEND
+EOF
+			cat CALPLT.PLT >> ${M}_${CMP}.PLT
+		done
+	done
+done
+
+DOPLTPNG F*PLT
