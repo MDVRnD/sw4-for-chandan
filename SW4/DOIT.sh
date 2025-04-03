@@ -44,3 +44,5 @@ FIN
 done
 
 # Run using SLRUM with `sbatch runruby.sw4run`
+# Or locally (and individually) with:
+# > mpirun -np 16 ~/Applications/sw4-3.0/optimize/sw4 mzzh200.sw4in
