@@ -23,7 +23,7 @@ format:
 execute:
   cache: true
   freeze: true # auto
-# jupyter: python3
+# jupyter: python3  # default
 ---
 
 # Introduction
@@ -119,6 +119,7 @@ $$
 The shear wave velocity model is shown in @fig-model.
 
 ```{python}
+#| eval: false
 %%script bash
 
 visit -cli -nowin -quiet << FIN &> /dev/null
@@ -171,13 +172,14 @@ Calculated displacements low passed at 5 Hz are shown in @fig-results.
 from obspy import read
 
 for comp in ("mxx", "myy", "mzz"):
-    stream = read("SW4/"+comp+".dir/rec.?", format="SAC")
-    b = stream[0].stats.starttime; ti = b+5; tf = b+35;
-    stream.filter('lowpass', freq=5.0)
+    stream = read("SW4/Dirac/"+comp+".dir/rec50.?", format="SAC")
+    # b = stream[0].stats.starttime;  # ti = b+5; tf = b+35;
+    # stream.filter('lowpass', freq=5.0)
+    stream.filter('bandpass', freqmin=0.05, freqmax=5.00)
     # print(comp)
     for tr in stream:
         tr.stats.station = comp
-    stream.plot(starttime=b+5, endtime=b+35, type='relative');
+    stream.plot();
 ```
 
 
