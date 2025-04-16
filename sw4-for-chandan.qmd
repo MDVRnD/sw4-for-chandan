@@ -26,6 +26,9 @@ execute:
 # jupyter: python3  # default
 ---
 
+<!-- Creates link to notebook in html output and states quarto version -->
+{{< embed sw4-for-chandan.ipynb#embedid >}}
+
 # Introduction
 
 Chandan asked, "Can you run MZZ, MXX, MYY seismograms for a layered medium in your SW4 and send me the output with the model?"
