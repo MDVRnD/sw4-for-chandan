@@ -1,6 +1,7 @@
 .DS_Store
 .jupyter_cache
 .ipynb_checkpoints
-/.quarto/
-/_site/
+*-preview.html
+*.out.ipynb
+*_files/
 
